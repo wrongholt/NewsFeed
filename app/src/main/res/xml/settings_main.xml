@@ -1,0 +1,32 @@
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center_vertical"-->
+    <!--android:layout_marginEnd="10dp"-->
+    <!--android:layout_marginLeft="10dp"-->
+    <!--android:layout_marginRight="10dp"-->
+    <!--android:layout_marginStart="10dp"-->
+    <!--android:orientation="vertical">-->
+    <!--<EditText-->
+        <!--android:hint="@string/settings_search_default"-->
+        <!--android:id="@+id/searchTool"-->
+        <!--android:selectAllOnFocus="true" />-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/settings_title">
+    <ListPreference
+        android:defaultValue="@string/settings_order_by_default"
+        android:entries="@array/settings_order_by_labels"
+        android:entryValues="@array/settings_order_by_values"
+        android:key="@string/settings_order_by_key"
+        android:title="@string/settings_order_by_label" />
+    <ListPreference
+        android:entries="@array/settings_page_size_labels"
+        android:entryValues="@array/settings_page_size_values"
+        android:key="@string/settings_page_size_key"
+        android:title="@string/settings_page_size_label" />
+
+
+
+</PreferenceScreen>
+<!--</LinearLayout>-->
