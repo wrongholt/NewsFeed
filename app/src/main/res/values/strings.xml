@@ -7,19 +7,20 @@
     <string name="settings_title">News Feed Settings</string>
     <string name="title_activity_settings">SettingsActivity</string>
 
-    <!-- Strings For Order-By Preference [CHAR LIMIT=30] -->
+    <string name="settings_search_label">Search</string>
+    <string name="settings_search_key" translatable="false">q</string>
+    <string name="settings_search_default" translatable="false">Business</string>
+
     <string name="settings_order_by_label">Order By</string>
     <string name="settings_order_by_key" translatable="false">orderBy</string>
 
     <string name="settings_order_by_default" translatable="false">@string/settings_order_by_relevance_value</string>
-    <!-- Label for order-by magnitude option [CHAR LIMIT=20] -->
     <string name="settings_order_by_oldest_label">Oldest Article</string>
     <string name="settings_order_by_oldest_value" translatable="false">oldest</string>
 
     <string name="settings_order_by_newest_label">Newest Article</string>
     <string name="settings_order_by_newest_value" translatable="false">newest</string>
 
-    <!-- Label for order-by most recent option [CHAR LIMIT=20] -->
     <string name="settings_order_by_relevance_label">Relevance</string>
     <string name="settings_order_by_relevance_value" translatable="false">relevance</string>
 

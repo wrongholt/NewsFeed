@@ -24,7 +24,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<NewsArticle>>,
         SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private final String REQUEST_URL = "https://content.guardianapis.com/search?q=Technology&show-tags=contributor";
+    private final String REQUEST_URL = "https://content.guardianapis.com/search?q=&show-tags=contributor";
     private ArticleAdapter mAdapter;
     private static final int LOADER_ID = 1;
     private TextView mEmptyStateTextView;
@@ -104,6 +104,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 getString(R.string.settings_page_size_key),
                 getString(R.string.settings_page_size_default)
         );
+        String search  = sharedPrefs.getString(
+                getString(R.string.settings_search_key),
+                getString(R.string.settings_search_default)
+        );
         Uri baseUri = Uri.parse(REQUEST_URL);
 
         Uri.Builder uriBuilder = baseUri.buildUpon();
@@ -111,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         uriBuilder.appendQueryParameter("api-key", "42773924-612f-42ca-8e4d-2f8c939ea2ed");
            uriBuilder.appendQueryParameter("page-size", pageSize);
         uriBuilder.appendQueryParameter("order-by", orderBy);
+        uriBuilder.appendQueryParameter("q", search);
 
         return new NewsLoader(this, uriBuilder.toString());
 
