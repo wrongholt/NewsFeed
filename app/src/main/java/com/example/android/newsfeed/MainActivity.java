@@ -109,8 +109,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
         uriBuilder.appendQueryParameter("api-key", "42773924-612f-42ca-8e4d-2f8c939ea2ed");
-           uriBuilder.appendQueryParameter("pageSize", pageSize);
-        uriBuilder.appendQueryParameter("orderBy", orderBy);
+           uriBuilder.appendQueryParameter("page-size", pageSize);
+        uriBuilder.appendQueryParameter("order-by", orderBy);
 
         return new NewsLoader(this, uriBuilder.toString());
 
