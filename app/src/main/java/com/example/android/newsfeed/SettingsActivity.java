@@ -23,6 +23,10 @@ public class SettingsActivity extends AppCompatActivity {
             addPreferencesFromResource(R.xml.settings_main);
             Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
             bindPreferenceSummaryToValue(orderBy);
+            Preference pageSize = findPreference(getString(R.string.settings_page_size_key));
+            bindPreferenceSummaryToValue(pageSize);
+            Preference search = findPreference(getString(R.string.settings_search_key));
+            bindPreferenceSummaryToValue(search);
         }
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {

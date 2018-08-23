@@ -27,4 +27,10 @@
     <string name="settings_page_size_label">Articles Per Page</string>
     <string name="settings_page_size_key" translatable="false">pageSize</string>
     <string name="settings_page_size_default">10</string>
+
+    <string name="apiKey">api-key</string>
+    <string name="orderBy">order-by</string>
+    <string name="pageSize">page-size</string>
+    <string name="question">q</string>
+
 </resources>

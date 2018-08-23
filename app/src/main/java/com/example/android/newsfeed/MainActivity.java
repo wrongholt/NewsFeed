@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -21,22 +23,27 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<NewsArticle>>,
         SharedPreferences.OnSharedPreferenceChangeListener {
 
     private final String REQUEST_URL = "https://content.guardianapis.com/search?q=&show-tags=contributor";
     private ArticleAdapter mAdapter;
     private static final int LOADER_ID = 1;
-    private TextView mEmptyStateTextView;
 
+    @BindView(R.id.empty_view)
+    TextView mEmptyStateTextView;
+    @BindView(R.id.list)
+    ListView articleListView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ListView articleListView = (ListView) findViewById(R.id.list);
+        ButterKnife.bind(this);
 
-        mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
         articleListView.setEmptyView(mEmptyStateTextView);
 
         mAdapter = new ArticleAdapter(this, new ArrayList<NewsArticle>());
@@ -45,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         prefs.registerOnSharedPreferenceChangeListener(this);
+
 
         articleListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -55,9 +63,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 Uri articleUri = Uri.parse(currentArticle.getmUrl());
 
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, articleUri);
-
-                startActivity(websiteIntent);
-
+                PackageManager packageManager = getPackageManager();
+                List<ResolveInfo> activities = packageManager.queryIntentActivities(websiteIntent, PackageManager.MATCH_DEFAULT_ONLY);
+                boolean isIntentSafe = activities.size() > 0;
+                if(isIntentSafe) {
+                    startActivity(websiteIntent);
+                }
             }
         });
 
@@ -112,10 +123,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-        uriBuilder.appendQueryParameter("api-key", "42773924-612f-42ca-8e4d-2f8c939ea2ed");
-           uriBuilder.appendQueryParameter("page-size", pageSize);
-        uriBuilder.appendQueryParameter("order-by", orderBy);
-        uriBuilder.appendQueryParameter("q", search);
+        uriBuilder.appendQueryParameter(getString(R.string.apiKey), "42773924-612f-42ca-8e4d-2f8c939ea2ed");
+           uriBuilder.appendQueryParameter(getString(R.string.pageSize), pageSize);
+        uriBuilder.appendQueryParameter(getString(R.string.orderBy), orderBy);
+        uriBuilder.appendQueryParameter(getString(R.string.question), search);
 
         return new NewsLoader(this, uriBuilder.toString());
 
